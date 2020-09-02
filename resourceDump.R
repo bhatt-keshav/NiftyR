@@ -40,3 +40,25 @@ wrap.labels <- function(x, len)
 # e.g.
 wr.lap <- wrap.labels(recipeCategoryDFIT$category, 18); wr.lap
 # "contenuto sponsorizzato"  becomes "contenuto\nsponsorizzato" 
+
+## 3. Read multiple files from a location
+raw_datas <-
+  list.files(path = rawdata_locn,
+             pattern = "*.sas7bdat", 
+             full.names = T) %>% 
+  lapply(., read_sas)
+# OR for csv
+raw_datas <-
+  list.files(path = rawdata_locn,
+             pattern = "*.csv",
+             full.names = T) %>%
+  lapply(., read.csv2, header = TRUE, sep = ";", )
+
+# Then Bind all the rows together
+bound_raws <- bind_rows(raw_datas)
+
+## 4. Convert all column names to lower case
+raw_datas <- lapply(raw_datas, 
+                    function(x) {colnames(x) <- tolower(colnames(x)) ;x })
+
+
