@@ -61,4 +61,9 @@ bound_raws <- bind_rows(raw_datas)
 raw_datas <- lapply(raw_datas, 
                     function(x) {colnames(x) <- tolower(colnames(x)) ;x })
 
+## 5. Convert column types
+some_df <- transform(some_df, col1 = as.numeric(col1), 
+          col2 = as.numeric(col2),
+          date_col = as.Date(date_col, format = '%m/%d/%Y'))
+
 
