@@ -19,4 +19,9 @@ mtcars %>% select(cyl, gear) %>% filter(cyl == 4)
 mtcars %>% group_by(cyl) %>% summarise(max_gear = max(gear))
 # Check
 mtcars %>% filter(cyl == 4)
+# Sums hp for each gear sub-group in cyl group
+mtcars %>% group_by(cyl, gear) %>% summarise(total_hp_per_gear_per_cyl = sum(hp))  
+# Check
+mtcars %>% filter(cyl == 4 & gear == 5)
+
 
