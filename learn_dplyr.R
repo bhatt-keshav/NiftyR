@@ -23,5 +23,17 @@ mtcars %>% filter(cyl == 4)
 mtcars %>% group_by(cyl, gear) %>% summarise(total_hp_per_gear_per_cyl = sum(hp))  
 # Check
 mtcars %>% filter(cyl == 4 & gear == 5)
+# Count is a convenience wrapper over group_by and summarise(n())
+mtcars_cyl_gear <- mtcars %>% count(gear, cyl, name = 'cyl_per_gear')
+# Above is equivalent to below
+mtcars %>% group_by(gear, cyl) %>% summarise(n())
+# This gives the max cyl per gear in the entire df. Hence 1 row
+mtcars_cyl_gear %>% slice_max(cyl_per_gear)
+# This gives the max cyl per gear group
+mtcars_cyl_gear %>% group_by(gear) %>% slice_max(cyl_per_gear)
+# Above is equivalent to 
+mtcars_cyl_gear %>% group_by(gear) %>% slice(which.max(cyl_per_gear))
+
+
 
 
