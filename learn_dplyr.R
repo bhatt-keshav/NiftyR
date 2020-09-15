@@ -34,6 +34,11 @@ mtcars_cyl_gear %>% group_by(gear) %>% slice_max(cyl_per_gear)
 # Above is equivalent to 
 mtcars_cyl_gear %>% group_by(gear) %>% slice(which.max(cyl_per_gear))
 
-
+# Cool way to bind rows
+# in the list arg put the two df you want to combine. And in the .id arg, name of the column (source) that will identify
+# where the particular row comes from
+cyl_disp <- bind_rows(list(mtcars_cyl_disp = mtcars_cyl_disp, 
+                           mpg_cyl_disp = mpg_cyl_disp),
+                      .id = 'source')
 
 
