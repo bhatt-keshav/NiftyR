@@ -67,3 +67,10 @@ some_df <- transform(some_df, col1 = as.numeric(col1),
           date_col = as.Date(date_col, format = '%m/%d/%Y'))
 
 
+# Create a dataframe of survey data
+# if there is a column of 1 length, R will automatically populate the rest of the rows
+survey <- data.frame("index" = c(1, 2, 3, 4, 5),
+                     "sex" = c("m", "m", "m", "f", "f"),
+                     "age" = c(99, 46, 23, 54, 23),
+                    "empty" = 0,
+                    "id" = "survey")
